@@ -1,26 +1,32 @@
 import { FC } from "react";
-import { Button, Checkbox, Form, Input } from 'antd';
+import { Button, Checkbox, Form, Input, Typography } from 'antd';
 import { rules } from "../utils/rules";
-import { useDispatch } from "react-redux";
-import { AuthActionCreators } from "../store/reducers/auth/action-creators";
 import { useTypedSelector } from "../hooks/useTypedSelector";
+import { useActions } from "../hooks/useActions";
+
+const { Text } = Typography;
+
+//username: Samantha
+//pass: 1-463-123-4447
 
 const LoginForm: FC = () => {
 
-    const dispatch = useDispatch();
-    const error = useTypedSelector(state => state.auth.error);
+    const {error, isLoading} = useTypedSelector(state => state.auth);
+    const {login} = useActions();
 
-    const onSubmit = () => {
-        dispatch(AuthActionCreators.login('user', '123'));
+    interface FormData {
+        username: string,
+        password: string,
+        remember: boolean
     }
 
-    const onFinishFailed = () => {
-
+    const onSubmit = (data: FormData) => {
+        login("user", "123", data.remember);
+        //login(data.username, data.password, data.remember);
     }
 
     return ( 
         <>
-        <p>{error}</p>
             <Form
                 name="basic"
                 labelCol={{ span: 8 }}
@@ -28,8 +34,16 @@ const LoginForm: FC = () => {
                 style={{ maxWidth: 600 }}
                 initialValues={{ remember: true }}
                 onFinish={onSubmit}
-                onFinishFailed={onFinishFailed}
                 autoComplete="off" >
+                    {error &&
+                        <div className="error-text-block">
+                            <Text 
+                                strong type="danger"
+                                >
+                                {error}
+                            </Text>
+                        </div>
+                    }
                     <Form.Item
                         label="Username"
                         name="username"
@@ -51,7 +65,7 @@ const LoginForm: FC = () => {
                     </Form.Item>
 
                     <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-                        <Button type="primary" htmlType="submit">
+                        <Button type="primary" htmlType="submit" loading={isLoading}>
                             Submit
                         </Button>
                     </Form.Item>

@@ -1,7 +1,7 @@
 import React from "react";
-import Login from "../pages/Login";
-import Event from "../pages/Event";
-import DetailEvent from "../pages/DetailEvent";
+import LoginPage from "../pages/LoginPage";
+import CalendarPage from "../pages/CalendarPage";
+import DetailPage from "../pages/DetailPage";
 
 export interface IRoute {
     path: string;
@@ -11,16 +11,16 @@ export interface IRoute {
 }
 
 export enum RouteNames {
-    LOGIN = '/login',
-    EVENT = '/event',
+    LOGIN_PAGE = '/login',
+    CALENDAR_PAGE = '/calendar',
     DETAIL_EVENT = '/detail-event'
 }
 
 export const publicRoutes: IRoute[] = [
-    {path: RouteNames.LOGIN, element: <Login/>, key: 0}
+    {path: RouteNames.LOGIN_PAGE, element: <LoginPage/>, key: 0}
 ]
 
 export const privateRoutes: IRoute[] = [
-    {path: RouteNames.EVENT, element: <Event/>, key: 1},
-    {path: RouteNames.DETAIL_EVENT, element: <DetailEvent/>, key: 2},
+    {path: RouteNames.CALENDAR_PAGE, element: <CalendarPage/>, key: 1},
+    {path: RouteNames.DETAIL_EVENT, element: <DetailPage/>, key: 2},
 ]

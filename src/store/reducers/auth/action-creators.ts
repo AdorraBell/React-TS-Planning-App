@@ -1,7 +1,7 @@
 import axios from "axios";
 import { AppDispatch } from "../..";
 import { IUser } from "../../../types/types";
-import {AuthActionsEnum, SetAuthAction, SetErrorAction, SetIsLoadingAction, SetUserAction} from "./types";
+import {AuthActionsEnum, SetAuthAction, SetErrorAction, SetIsLoadingAction, SetUserAction, SetUserName} from "./types";
 
 export const AuthActionCreators = {
     setUser: (user: IUser): SetUserAction => ({
@@ -20,25 +20,38 @@ export const AuthActionCreators = {
         type: AuthActionsEnum.SET_IS_LOADING,
         payload: isLoading
     }),
+    setUserName: (username: string): SetUserName => ({
+        type: AuthActionsEnum.SET_USERNAME,
+        payload: username
+    }),
 
-    login: (username: string, password: string) => 
+    login: (username: string, password: string, remember?:boolean) => 
         async (dispatch: AppDispatch) => {
             try {
                 dispatch(AuthActionCreators.setIsLoading(true));
-                const response = axios.get<IUser[]>('../../../../public/users.json');
-                const mockUser = (await response).data.find(
-                    (user: IUser) => user.username === username && user.password === password
-                )
+
+                setTimeout( async () => {
+                    const response = axios.get<IUser[]>('./fakeUsers/users.json'); 
+                    const mockUser = (await response).data.find(
+                        (user: IUser) => user.username === username && user.password === password
+                    )
+                    if(mockUser){
+                        dispatch(AuthActionCreators.setAuth(true));
+                        dispatch(AuthActionCreators.setUser(mockUser));
+                        dispatch(AuthActionCreators.setUserName(mockUser.username));
+                        if(remember){
+                            localStorage.setItem("auth", JSON.stringify(true));
+                            localStorage.setItem("username", mockUser.username);
+                        }else {
+                            sessionStorage.setItem("auth", JSON.stringify(true));
+                            sessionStorage.setItem("username", mockUser.username);
+                        }
+                    } else {
+                        dispatch(AuthActionCreators.setError('Incorrect username or password'))
+                    }
+                    dispatch(AuthActionCreators.setIsLoading(false));
+                }, 500)    
                 
-                if(mockUser){
-                    localStorage.setItem('auth', 'true');
-                    localStorage.setItem('username', mockUser.username);
-                    dispatch(AuthActionCreators.setAuth(true));
-                    dispatch(AuthActionCreators.setUser(mockUser));
-                } else {
-                    dispatch(AuthActionCreators.setError('Incorrect username or password'))
-                }
-                dispatch(AuthActionCreators.setIsLoading(false));
             } catch (e) {
                 dispatch(AuthActionCreators.setError('Request error'))
             }
@@ -46,10 +59,12 @@ export const AuthActionCreators = {
 
     logout: () => 
         async (dispatch: AppDispatch) => {
-            try {
-
-            } catch (e) {
-
-            }
+            sessionStorage.removeItem("auth");
+            sessionStorage.removeItem("username");
+            localStorage.removeItem("auth");
+            localStorage.removeItem("username");
+            dispatch(AuthActionCreators.setUser({} as IUser));
+            dispatch(AuthActionCreators.setAuth(false)); 
+            dispatch(AuthActionCreators.setUserName(''));
     }
 }

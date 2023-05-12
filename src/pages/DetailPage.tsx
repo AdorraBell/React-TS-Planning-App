@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-const DetailEvent: FC = () => {
+const DetailPage: FC = () => {
     return ( 
         <div>
             DETAIL
@@ -8,4 +8,4 @@ const DetailEvent: FC = () => {
      );
 }
  
-export default DetailEvent;
+export default DetailPage;

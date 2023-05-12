@@ -16,7 +16,7 @@ const AppRouter: FC = () => {
                     {...route}
                     />
             )}
-            <Route path="/*" element={<Navigate to={RouteNames.EVENT} replace />} />
+            <Route path="/*" element={<Navigate to={RouteNames.CALENDAR_PAGE} replace />} />
         </Routes>
         :
         <Routes>
@@ -25,7 +25,7 @@ const AppRouter: FC = () => {
                     {...route}  
                     />
             )}
-            <Route path="/*" element={<Navigate to={RouteNames.LOGIN} replace />} />
+            <Route path="/*" element={<Navigate to={RouteNames.LOGIN_PAGE} replace />} />
         </Routes>
      );
 }
