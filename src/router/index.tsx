@@ -13,7 +13,7 @@ export interface IRoute {
 export enum RouteNames {
     LOGIN_PAGE = '/login',
     CALENDAR_PAGE = '/calendar',
-    DETAIL_EVENT = '/detail-event'
+    DETAIL_PAGE = '/detail-page/:id'
 }
 
 export const publicRoutes: IRoute[] = [
@@ -22,5 +22,5 @@ export const publicRoutes: IRoute[] = [
 
 export const privateRoutes: IRoute[] = [
     {path: RouteNames.CALENDAR_PAGE, element: <CalendarPage/>, key: 1},
-    {path: RouteNames.DETAIL_EVENT, element: <DetailPage/>, key: 2},
+    {path: RouteNames.DETAIL_PAGE, element: <DetailPage/>, key: 2},
 ]

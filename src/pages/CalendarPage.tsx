@@ -7,7 +7,8 @@ const Event: FC = () => {
         <>
             <Row>
                 <Col className="calendar-row">
-                    <AppCalendar />
+                    <AppCalendar 
+                        events={[]} />
                 </Col>
             </Row>
         </> 
