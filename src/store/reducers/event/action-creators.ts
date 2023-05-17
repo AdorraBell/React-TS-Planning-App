@@ -1,7 +1,7 @@
 import { IEvent, IUser } from "types/types";
 import { EventActionEnum, SetEventsAction, SetGuestsAction } from "./types";
 import { AppDispatch } from "store";
-import axios from "axios";
+import { getUsers } from "../../../api/UserService";
 
 export const EventActionCreators = {
 
@@ -17,9 +17,33 @@ export const EventActionCreators = {
 
     fetchGuests: () => async (dispatch: AppDispatch) => {
         try {
-            const guests = await axios.get('./fakeUsers/users.json')
+            const response = getUsers(); //await axios.get('./fakeUsers/users.json')
+            const guests = (await response).data;
+            dispatch(EventActionCreators.setGuests(guests));
         } catch (e) {
             console.log(e);
+        }
+    },
+
+    createEvent: (event: IEvent) => async (dispatch: AppDispatch) => {
+        try {
+            const events = JSON.parse(localStorage.getItem("events") || "[]") as IEvent[];
+            events.push(event);
+            dispatch(EventActionCreators.setEvents(events));
+            localStorage.setItem("events", JSON.stringify(events));
+        } catch (e) {
+            console.log(e);
+        }
+    },
+    
+    fetchEvents: (username: string) => async (dispatch: AppDispatch) => {
+        try {
+            const events = JSON.parse(localStorage.getItem("events") || "[]") as IEvent[];
+            const currentUserEvents = events.filter(ev => 
+                ev.author === username || ev.guest === username);
+            dispatch(EventActionCreators.setEvents(currentUserEvents));
+        } catch (e) {
+
         }
     }
 }

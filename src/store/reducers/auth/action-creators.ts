@@ -1,7 +1,7 @@
-import axios from "axios";
 import { AppDispatch } from "../..";
 import { IUser } from "../../../types/types";
 import {AuthActionsEnum, SetAuthAction, SetErrorAction, SetIsLoadingAction, SetUserAction, SetUserName} from "./types";
+import { getUsers } from "../../../api/UserService";
 
 export const AuthActionCreators = {
     setUser: (user: IUser): SetUserAction => ({
@@ -29,16 +29,12 @@ export const AuthActionCreators = {
         async (dispatch: AppDispatch) => {
             try {
                 dispatch(AuthActionCreators.setIsLoading(true));
-
                 setTimeout( async () => {
-                    const response = axios.get<IUser[]>('./fakeUsers/users.json'); 
+                    const response = getUsers(); //axios.get<IUser[]>('./fakeUsers/users.json');
                     const mockUser = (await response).data.find(
                         (user: IUser) => user.username === username && user.password === password
                     )
                     if(mockUser){
-                        dispatch(AuthActionCreators.setAuth(true));
-                        dispatch(AuthActionCreators.setUser(mockUser));
-                        dispatch(AuthActionCreators.setUserName(mockUser.username));
                         if(remember){
                             localStorage.setItem("auth", JSON.stringify(true));
                             localStorage.setItem("username", mockUser.username);
@@ -46,6 +42,9 @@ export const AuthActionCreators = {
                             sessionStorage.setItem("auth", JSON.stringify(true));
                             sessionStorage.setItem("username", mockUser.username);
                         }
+                        dispatch(AuthActionCreators.setUser(mockUser));
+                        dispatch(AuthActionCreators.setAuth(true));
+                        dispatch(AuthActionCreators.setUserName(mockUser.username));
                     } else {
                         dispatch(AuthActionCreators.setError('Incorrect username or password'))
                     }

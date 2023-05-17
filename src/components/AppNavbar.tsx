@@ -11,7 +11,7 @@ const { Text } = Typography;
 const Navbar: FC = () => {
 
     const isAuth = useTypedSelector(state => state.auth.isAuth);
-    const username = useTypedSelector(state => state.auth.username)
+    const username = useTypedSelector(state => state.auth.username);
     const navigate = useNavigate();
     const {logout} = useActions();
 

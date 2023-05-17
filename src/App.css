@@ -3,13 +3,33 @@
   height: calc(100vh - 64px);
 }
 
-.error-text-block{
+.error-text-block {
   margin: 20px;
   text-align: center;
   width: 100%;
 }
 
-.calendar-row{
+.calendar-row {
   margin: 0 auto;
   max-width: 1200px;
+}
+
+.lineVariant1 {
+  background-color: aquamarine;
+}
+
+.lineVariant2 {
+  background-color: rgb(127, 225, 255);
+}
+
+.lineVariant3 {
+  background-color: rgb(253, 255, 127);
+}
+
+.lineVariant4 {
+  background-color: rgb(242, 188, 251);
+}
+
+.lineVariant5 {
+  background-color: rgb(252, 217, 217);
 }

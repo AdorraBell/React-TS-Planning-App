@@ -6,7 +6,8 @@ export interface IUser {
 
 export interface IEvent {
     author: string,
-    guest: string,
+    guest: string | null,
     date: string,
-    description: string
+    eventName: string,
+    eventDescription: string
 }

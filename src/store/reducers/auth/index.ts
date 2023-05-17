@@ -3,11 +3,11 @@ import { AuthAction, AuthActionsEnum, AuthState } from "./types";
 
 
 const initialState: AuthState = {
-    isAuth: Boolean(sessionStorage.getItem('auth')) || Boolean(localStorage.getItem('auth')) || false,
+    isAuth: false,
     error: '',
     isLoading: false,
     user: {} as IUser,
-    username: sessionStorage.getItem('username') || localStorage.getItem('username') || ''
+    username: ''
 }
 
 export default function authReducer(state = initialState, action: AuthAction): AuthState {

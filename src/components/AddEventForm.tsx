@@ -1,12 +1,42 @@
-import { FC } from "react";
+import { ChangeEvent, FC, useState  } from "react";
 import { Button, Form, Input, Select} from 'antd';
 import { rules } from "../utils/rules";
+import { IUser, IEvent } from "types/types";
+import { useTypedSelector } from "../hooks/useTypedSelector";
 
 
-const AddEventForm: FC = () => {
+interface AppEventFormProps {
+    guests: IUser[],
+    eventDate: string,
+    formSubmit: (event: IEvent) => void
+}
 
-    const onSubmit = (data: FormData) => {
-       
+const AddEventForm: FC<AppEventFormProps> = ({guests, eventDate, formSubmit}) => {
+
+    const username = useTypedSelector(state => state.auth.username);
+
+    const [event, setEvent] = useState<IEvent>({
+        author: username,
+        date: eventDate,
+        eventName: '',
+        eventDescription: '',
+        guest: null
+    } as IEvent);
+
+    const selectGuest = (guest: string) => {
+        setEvent({...event, guest})
+    }
+
+    const titleChanged = (title: ChangeEvent<HTMLInputElement>) => {
+        setEvent({...event, eventName: title.target.value})
+    }
+
+    const descriptionChanged = (description: ChangeEvent<HTMLInputElement>) => {
+        setEvent({...event, eventDescription: description.target.value})
+    }
+
+    const onSubmit = () => {
+       formSubmit(event);
     }
 
     return ( 
@@ -23,7 +53,9 @@ const AddEventForm: FC = () => {
                     name="eventname"
                     rules={[rules.required('Please input name of event!')]}
                     >
-                    <Input />
+                    <Input 
+                        value={event.eventName} 
+                        onChange={titleChanged} />
                 </Form.Item>
 
                 <Form.Item
@@ -31,16 +63,24 @@ const AddEventForm: FC = () => {
                     name="eventdescription"
                     rules={[rules.required('Please input event description!')]}
                     >
-                    <Input />
+                    <Input 
+                        value={event.eventDescription}
+                        onChange={descriptionChanged} />
                 </Form.Item>
 
                 <Form.Item
                     label="Add Guest"
                     name="addguest">
-                    <Select>
-                        <Select.Option value="first">
-                            first
-                        </Select.Option>
+                    <Select
+                        onChange={selectGuest}>
+                        {guests.map(guest => 
+                            <Select.Option 
+                                value={guest.username}
+                                key={guest.username}>
+                                    {guest.username}
+                            </Select.Option>
+                        )}
+                        
                     </Select>
                 </Form.Item>
 
