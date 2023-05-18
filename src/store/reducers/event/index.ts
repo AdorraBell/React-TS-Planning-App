@@ -1,4 +1,4 @@
-import { EventAction, EventActionEnum, EventState } from "./types";
+import { EventAction, EventActionEnum, EventState } from "src/store/reducers/event/types";
 
 const initialState: EventState = {
     events: [],

@@ -1,6 +1,6 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import thunk from "redux-thunk";
-import reducers from "./reducers";
+import reducers from "src/store/reducers";
 
 const reducer = combineReducers(reducers);
 

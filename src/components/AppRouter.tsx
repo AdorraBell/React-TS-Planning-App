@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
-import { RouteNames, privateRoutes, publicRoutes } from "../router";
-import { useTypedSelector } from "../hooks/useTypedSelector";
+import { RouteNames, privateRoutes, publicRoutes } from "src/router";
+import { useTypedSelector } from "src/hooks/useTypedSelector";
 
 const AppRouter: FC = () => {
 

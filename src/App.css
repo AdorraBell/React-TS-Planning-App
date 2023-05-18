@@ -3,6 +3,10 @@
   height: calc(100vh - 64px);
 }
 
+.w100 {
+  width: 100vw;
+}
+
 .error-text-block {
   margin: 20px;
   text-align: center;
@@ -14,22 +18,20 @@
   max-width: 1200px;
 }
 
-.lineVariant1 {
-  background-color: aquamarine;
+.detailEventBlock{
+  padding: 10px;
+  margin: 3px auto;
+  width: 90%;
+  max-width: 1200px;
+  border-radius: 5px;
 }
 
-.lineVariant2 {
-  background-color: rgb(127, 225, 255);
+.detailButtonsWrapper {
+  margin: 30px auto;
+  width: 90%;
+  max-width: 700px;
 }
 
-.lineVariant3 {
-  background-color: rgb(253, 255, 127);
-}
-
-.lineVariant4 {
-  background-color: rgb(242, 188, 251);
-}
-
-.lineVariant5 {
-  background-color: rgb(252, 217, 217);
+.alItCenter{
+  align-items: center;
 }

@@ -1,8 +1,8 @@
 import { FC, useEffect } from "react";
-import AppCalendar from "../components/AppCalendar";
+import AppCalendar from "src/components/AppCalendar";
 import { Row, Col } from "antd";
-import { useTypedSelector } from "../hooks/useTypedSelector";
-import { useActions } from "../hooks/useActions";
+import { useTypedSelector } from "src/hooks/useTypedSelector";
+import { useActions } from "src/hooks/useActions";
 
 const Event: FC = () => {
 

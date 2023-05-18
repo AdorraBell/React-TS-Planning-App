@@ -1,8 +1,8 @@
 import { FC } from "react";
 import { Button, Checkbox, Form, Input, Typography } from 'antd';
-import { rules } from "../utils/rules";
-import { useTypedSelector } from "../hooks/useTypedSelector";
-import { useActions } from "../hooks/useActions";
+import { rules } from "src/utils/rules";
+import { useTypedSelector } from "src/hooks/useTypedSelector";
+import { useActions } from "src/hooks/useActions";
 
 const { Text } = Typography;
 
@@ -21,8 +21,7 @@ const LoginForm: FC = () => {
     }
 
     const onSubmit = (data: FormData) => {
-        login("user", "123", data.remember);
-        //login(data.username, data.password, data.remember);
+        login(data.username, data.password, data.remember);
     }
 
     return ( 

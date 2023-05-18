@@ -1,18 +1,19 @@
 import { FC, useEffect } from "react";
-import AppRouter from "./components/AppRouter";
-import AppNavbar from "./components/AppNavbar";
+import AppRouter from "src/components/AppRouter";
+import AppNavbar from "src/components/AppNavbar";
 import { Layout } from "antd";
-import './App.css';
-import { useActions } from "./hooks/useActions";
-import { IUser } from "./types/types";
+import 'src/App.css';
+import { useActions } from "src/hooks/useActions";
+import { IUser } from "src/types/types";
 
 const App: FC = () => {
 
-  const {setUser, setAuth} = useActions();
+  const {setUser, setUserName, setAuth} = useActions();
 
     useEffect(() => {
         if(localStorage.getItem('auth')) {
-            setUser({username: localStorage.getItem('username' || '')} as IUser)
+            setUser({username: localStorage.getItem('username' || '')} as IUser);
+            setUserName(localStorage.getItem('username') || '');
             setAuth(true);
         }
     }, [])

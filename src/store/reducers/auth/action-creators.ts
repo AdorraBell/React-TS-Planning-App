@@ -1,7 +1,7 @@
-import { AppDispatch } from "../..";
-import { IUser } from "../../../types/types";
+import { AppDispatch } from "src/store";
+import { IUser } from "src/types/types";
 import {AuthActionsEnum, SetAuthAction, SetErrorAction, SetIsLoadingAction, SetUserAction, SetUserName} from "./types";
-import { getUsers } from "../../../api/UserService";
+import { getUsers } from "src/api/UserService";
 
 export const AuthActionCreators = {
     setUser: (user: IUser): SetUserAction => ({

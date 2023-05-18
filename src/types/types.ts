@@ -1,7 +1,7 @@
 
 export interface IUser {
-    username: string;
-    password: string;
+    username: string,
+    password: string,
 }
 
 export interface IEvent {
@@ -9,5 +9,12 @@ export interface IEvent {
     guest: string | null,
     date: string,
     eventName: string,
-    eventDescription: string
+    eventDescription: string,
+    id: number,
+    eventTheme: string
+}
+
+export interface IEventTheme {
+    name: string,
+    value: string
 }

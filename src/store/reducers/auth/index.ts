@@ -1,4 +1,4 @@
-import { IUser } from "../../../types/types";
+import { IUser } from "src/types/types";
 import { AuthAction, AuthActionsEnum, AuthState } from "./types";
 
 

@@ -1,7 +1,7 @@
-import { IEvent, IUser } from "types/types";
-import { EventActionEnum, SetEventsAction, SetGuestsAction } from "./types";
-import { AppDispatch } from "store";
-import { getUsers } from "../../../api/UserService";
+import { IEvent, IUser } from "src/types/types";
+import { EventActionEnum, SetEventsAction, SetGuestsAction } from "src/store/reducers/event/types";
+import { AppDispatch } from "src/store";
+import { getUsers } from "src/api/UserService";
 
 export const EventActionCreators = {
 
@@ -45,5 +45,18 @@ export const EventActionCreators = {
         } catch (e) {
 
         }
+    },
+
+
+    deleteEvent: (id: number, currentUserEvents: IEvent[]) => async (dispatch: AppDispatch) => {
+        let events = JSON.parse(localStorage.getItem("events") || "[]") as IEvent[];
+        events = [...events.filter(ev => {
+            if(ev.id !== id) return ev;
+        })]
+        localStorage.setItem("events", JSON.stringify(events));
+        const newCurrentUserEvents = [...currentUserEvents.filter(ev => {
+            if(ev.id !== id) return ev;
+        })]
+        dispatch(EventActionCreators.setEvents(newCurrentUserEvents));
     }
 }

@@ -1,6 +1,6 @@
 import { Calendar } from "antd";
 import { FC } from "react";
-import { IEvent } from "types/types";
+import { IEvent } from "src/types/types";
 import type { Dayjs } from 'dayjs';
 import { useNavigate } from "react-router-dom";
 
@@ -22,16 +22,14 @@ const AppCalendar: FC<AppCalendarProps> = (props) => {
         const currentDayEvents = props.events.filter((ev: IEvent) =>
             ev.date === formatedData 
         );
-        const randomNum = (Math.random()*(5-1) + 1).toFixed();
-        const lineClass = `lineVariant${randomNum}`;
 
         return (
           <div>
-            {currentDayEvents.map((ev: IEvent, index: number) =>
+            {currentDayEvents.map(ev =>
                 <div 
-                    key={index}
-                    className={lineClass}>
-                    {ev.eventName}
+                    key={ev.id}
+                    style={{background: ev.eventTheme}}>
+                        {ev.eventName}
                 </div>
             )}
           </div>

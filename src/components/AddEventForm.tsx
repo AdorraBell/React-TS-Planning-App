@@ -1,8 +1,9 @@
 import { ChangeEvent, FC, useState  } from "react";
-import { Button, Form, Input, Select} from 'antd';
-import { rules } from "../utils/rules";
-import { IUser, IEvent } from "types/types";
-import { useTypedSelector } from "../hooks/useTypedSelector";
+import { Button, Form, Input, Radio, RadioChangeEvent, Select } from 'antd';
+import { rules } from "src/utils/rules";
+import { IUser, IEvent } from "src/types/types";
+import { useTypedSelector } from "src/hooks/useTypedSelector";
+import { eventColors } from "src/constants/eventColors";
 
 
 interface AppEventFormProps {
@@ -20,8 +21,10 @@ const AddEventForm: FC<AppEventFormProps> = ({guests, eventDate, formSubmit}) =>
         date: eventDate,
         eventName: '',
         eventDescription: '',
-        guest: null
-    } as IEvent);
+        guest: null,
+        id: 1,
+        eventTheme: "transparent"
+    });
 
     const selectGuest = (guest: string) => {
         setEvent({...event, guest})
@@ -36,7 +39,11 @@ const AddEventForm: FC<AppEventFormProps> = ({guests, eventDate, formSubmit}) =>
     }
 
     const onSubmit = () => {
-       formSubmit(event);
+       formSubmit({...event, id: Date.now()});
+    }
+
+    const setEventTheme = (e: RadioChangeEvent) => {
+        setEvent({...event, eventTheme: e.target.value})
     }
 
     return ( 
@@ -83,7 +90,24 @@ const AddEventForm: FC<AppEventFormProps> = ({guests, eventDate, formSubmit}) =>
                         
                     </Select>
                 </Form.Item>
-
+                            
+                <Form.Item
+                    label="Event Theme"
+                    name="eventtheme">
+                    <Radio.Group 
+                        onChange={setEventTheme}>
+                        {eventColors.map(color =>
+                            <Radio 
+                                value={color.value}
+                                style={{background: color.value}}
+                                key={color.value}>
+                                    {color.name}
+                            </Radio>
+                        )}
+                    </Radio.Group>
+                    
+                </Form.Item>
+                
                 <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
                     <Button type="primary" htmlType="submit">
                         Submit

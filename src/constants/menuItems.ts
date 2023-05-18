@@ -1,6 +1,5 @@
 import { RouteNames } from "../router";
 
-
 interface IMenu {
     path?: string,
     label: string,
@@ -13,6 +12,5 @@ export const publicMenuItems: IMenu[] = [
 
 export const privateMenuItems: IMenu[] = [
     {path: RouteNames.CALENDAR_PAGE, label: 'Calendar', key: 1},
-    {path: RouteNames.DETAIL_PAGE, label: 'Detail', key: 2},
     {label: 'Log out', key: 3}
 ]

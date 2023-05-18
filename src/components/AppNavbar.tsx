@@ -1,10 +1,10 @@
 import { Row, Menu, Col, MenuProps, Typography } from "antd";
 import { FC } from "react";
 import { useNavigate } from "react-router-dom";
-import { useTypedSelector } from "../hooks/useTypedSelector";
-import { privateMenuItems, publicMenuItems } from "../constants/menuItems";
+import { useTypedSelector } from "src/hooks/useTypedSelector";
+import { privateMenuItems, publicMenuItems } from "src/constants/menuItems";
 import { Header } from "antd/es/layout/layout";
-import { useActions } from "../hooks/useActions";
+import { useActions } from "src/hooks/useActions";
 
 const { Text } = Typography;
 

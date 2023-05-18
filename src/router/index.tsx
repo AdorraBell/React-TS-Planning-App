@@ -1,7 +1,7 @@
 import React from "react";
-import LoginPage from "../pages/LoginPage";
-import CalendarPage from "../pages/CalendarPage";
-import DetailPage from "../pages/DetailPage";
+import LoginPage from "src/pages/LoginPage";
+import CalendarPage from "src/pages/CalendarPage";
+import DetailPage from "src/pages/DetailPage";
 
 export interface IRoute {
     path: string;

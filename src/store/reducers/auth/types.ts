@@ -1,4 +1,4 @@
-import { IUser } from "../../../types/types";
+import { IUser } from "src/types/types";
 
 export interface AuthState {
     isAuth: boolean;

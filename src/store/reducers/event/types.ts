@@ -1,4 +1,4 @@
-import { IEvent, IUser } from "types/types";
+import { IEvent, IUser } from "src/types/types";
 
 export interface EventState {
     guests: IUser[];
