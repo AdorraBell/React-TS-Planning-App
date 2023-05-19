@@ -2,6 +2,7 @@ import { IEvent, IUser } from "src/types/types";
 import { EventActionEnum, SetEventsAction, SetGuestsAction } from "src/store/reducers/event/types";
 import { AppDispatch } from "src/store";
 import { getUsers } from "src/api/UserService";
+import { deleteEventById } from "src/helpers/deleteEventById";
 
 export const EventActionCreators = {
 
@@ -17,7 +18,7 @@ export const EventActionCreators = {
 
     fetchGuests: () => async (dispatch: AppDispatch) => {
         try {
-            const response = getUsers(); //await axios.get('./fakeUsers/users.json')
+            const response = getUsers();
             const guests = (await response).data;
             dispatch(EventActionCreators.setGuests(guests));
         } catch (e) {
@@ -40,7 +41,8 @@ export const EventActionCreators = {
         try {
             const events = JSON.parse(localStorage.getItem("events") || "[]") as IEvent[];
             const currentUserEvents = events.filter(ev => 
-                ev.author === username || ev.guest === username);
+                ev.author === username || ev.guest === username
+            );
             dispatch(EventActionCreators.setEvents(currentUserEvents));
         } catch (e) {
 
@@ -50,13 +52,9 @@ export const EventActionCreators = {
 
     deleteEvent: (id: number, currentUserEvents: IEvent[]) => async (dispatch: AppDispatch) => {
         let events = JSON.parse(localStorage.getItem("events") || "[]") as IEvent[];
-        events = [...events.filter(ev => {
-            if(ev.id !== id) return ev;
-        })]
+        events = deleteEventById(events, id);
         localStorage.setItem("events", JSON.stringify(events));
-        const newCurrentUserEvents = [...currentUserEvents.filter(ev => {
-            if(ev.id !== id) return ev;
-        })]
+        const newCurrentUserEvents = deleteEventById(currentUserEvents, id);
         dispatch(EventActionCreators.setEvents(newCurrentUserEvents));
     }
 }

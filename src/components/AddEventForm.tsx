@@ -108,8 +108,11 @@ const AddEventForm: FC<AppEventFormProps> = ({guests, eventDate, formSubmit}) =>
                     
                 </Form.Item>
                 
-                <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-                    <Button type="primary" htmlType="submit">
+                <Form.Item 
+                    wrapperCol={{ offset: 8, span: 16 }}>
+                    <Button 
+                        type="primary" 
+                        htmlType="submit">
                         Submit
                     </Button>
                 </Form.Item>

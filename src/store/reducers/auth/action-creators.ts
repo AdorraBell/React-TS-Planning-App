@@ -1,6 +1,6 @@
 import { AppDispatch } from "src/store";
 import { IUser } from "src/types/types";
-import {AuthActionsEnum, SetAuthAction, SetErrorAction, SetIsLoadingAction, SetUserAction, SetUserName} from "./types";
+import {AuthActionsEnum, SetAuthAction, SetErrorAction, SetIsLoadingAction, SetUserAction, SetUserName} from "src/store/reducers/auth/types";
 import { getUsers } from "src/api/UserService";
 
 export const AuthActionCreators = {
@@ -30,7 +30,7 @@ export const AuthActionCreators = {
             try {
                 dispatch(AuthActionCreators.setIsLoading(true));
                 setTimeout( async () => {
-                    const response = getUsers(); //axios.get<IUser[]>('./fakeUsers/users.json');
+                    const response = getUsers(); 
                     const mockUser = (await response).data.find(
                         (user: IUser) => user.username === username && user.password === password
                     )

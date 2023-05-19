@@ -44,11 +44,11 @@ const Navbar: FC = () => {
                     {
                         isAuth ?
                         <Menu
-                                theme="dark"
-                                mode="horizontal"
-                                items={privateMenuItems}
-                                onClick={onClick}
-                                />
+                            theme="dark"
+                            mode="horizontal"
+                            items={privateMenuItems}
+                            onClick={onClick}
+                            />
 
                         :
                         <Menu

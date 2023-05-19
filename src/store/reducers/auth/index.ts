@@ -1,5 +1,5 @@
 import { IUser } from "src/types/types";
-import { AuthAction, AuthActionsEnum, AuthState } from "./types";
+import { AuthAction, AuthActionsEnum, AuthState } from "src/store/reducers/auth/types";
 
 
 const initialState: AuthState = {

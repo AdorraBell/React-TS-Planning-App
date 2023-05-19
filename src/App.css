@@ -7,13 +7,17 @@
   width: 100vw;
 }
 
-.error-text-block {
+.mr20 {
+  margin: 20px;
+}
+
+.errorTextBlock {
   margin: 20px;
   text-align: center;
   width: 100%;
 }
 
-.calendar-row {
+.calendarRow {
   margin: 0 auto;
   max-width: 1200px;
 }

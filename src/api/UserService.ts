@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import { IUser } from "types/types";
+import { IUser } from "src/types/types";
 
 
 export const getUsers = (): Promise<AxiosResponse<IUser[]>> => {

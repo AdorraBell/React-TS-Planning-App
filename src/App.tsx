@@ -10,14 +10,13 @@ const App: FC = () => {
 
   const {setUser, setUserName, setAuth} = useActions();
 
-    useEffect(() => {
-        if(localStorage.getItem('auth')) {
-            setUser({username: localStorage.getItem('username' || '')} as IUser);
-            setUserName(localStorage.getItem('username') || '');
-            setAuth(true);
-        }
-    }, [])
-    
+  useEffect(() => {
+      if(localStorage.getItem('auth')) {
+          setUser({username: localStorage.getItem('username' || '')} as IUser);
+          setUserName(localStorage.getItem('username') || '');
+          setAuth(true);
+      }
+  }, [])
     
   return ( 
     <Layout>

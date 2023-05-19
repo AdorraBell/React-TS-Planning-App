@@ -5,6 +5,7 @@
     "module": "ESNext",
     "skipLibCheck": true,
     "baseUrl": "./",
+    "types": ["vite/client"],
 
     /* Bundler mode */
     "moduleResolution": "bundler",

@@ -9,7 +9,7 @@ interface AppCalendarProps {
     events: IEvent[]
 }
 
-const AppCalendar: FC<AppCalendarProps> = (props) => {
+const AppCalendar: FC<AppCalendarProps> = ({events}) => {
 
     const navigate = useNavigate();
 
@@ -19,7 +19,7 @@ const AppCalendar: FC<AppCalendarProps> = (props) => {
 
     const dateCellRender = (value: Dayjs) => {
         const formatedData = value.format('YYYY-MM-DD');
-        const currentDayEvents = props.events.filter((ev: IEvent) =>
+        const currentDayEvents = events.filter(ev =>
             ev.date === formatedData 
         );
 

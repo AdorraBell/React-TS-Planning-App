@@ -17,14 +17,12 @@ const Event: FC = () => {
     const {events} = useTypedSelector(state => state.event);
 
     return (
-        <>
-            <Row>
-                <Col className="calendar-row">
-                    <AppCalendar 
-                        events={events} />
-                </Col>
-            </Row>
-        </> 
+        <Row>
+            <Col className="calendarRow">
+                <AppCalendar 
+                    events={events} />
+            </Col>
+        </Row>
     );
 }
  
