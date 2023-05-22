@@ -8,10 +8,11 @@ interface DeleteEventWarningProps {
 }
 
 const DeleteEventWarning: FC<DeleteEventWarningProps> = ({closeModal, deletePoint}) => {
+    
     return ( 
         <Col>
             <Row>
-                Are you sure you want to remove the event?
+                Are you sure you want to delete event?
             </Row>
             <Row
                 justify="space-between"
@@ -28,7 +29,6 @@ const DeleteEventWarning: FC<DeleteEventWarningProps> = ({closeModal, deletePoin
                     onClick={deletePoint}>
                     Delete Event
                 </Button>
- 
             </Row>
         </Col>
      );

@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useState, useMemo, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { Row, Button, Modal } from 'antd';
 import AddEventForm from "src/components/AddEventForm";
@@ -32,25 +32,25 @@ const DateEvents: FC<DateEventsProps> = ({date}) => {
         fetchGuests();
         fetchEvents(user.username);
         dateHasPassed(moment(date));
-        setCurrentEvents();
+        setCurrentEvents;
     }, [])
 
-    const saveEvent = (event: IEvent) => {
+    const saveEvent = useCallback((event: IEvent) => {
         createEvent(event);
         changeAddEventModalVisible();
         setCurrentDataEvents([...currentDataEvents, event]);
-    }
+    }, [isAddEventModalVisible])
 
     const goBack = () => {
         navigate('/calendar/');
     }
 
-    const setCurrentEvents = () => {
+    const setCurrentEvents = useMemo(() => {
         const currentEvents = events.filter(ev => 
             ev.date === date
         )
-        setCurrentDataEvents(currentEvents);
-    }
+        setCurrentDataEvents(currentEvents);   
+    }, [date])
 
     const dateHasPassed = (date: Moment) => {
         if(moment(date).isSameOrBefore(moment())){
@@ -60,14 +60,14 @@ const DateEvents: FC<DateEventsProps> = ({date}) => {
         }
     }
 
-    const deletePoint = () => {
+    const deletePoint = useCallback(() => {
         const eventId = deletedEventId;
         deleteEvent(eventId, events);
         setCurrentDataEvents([...currentDataEvents.filter(ev => 
             ev.id !== eventId
         )]);
         changeRemoveEventModalVisible();
-    }
+    }, [deletedEventId])
 
     const deleteButtonClicked = (e: React.MouseEvent<HTMLElement>) => {
         changeRemoveEventModalVisible();

@@ -34,7 +34,7 @@ const AppCalendar: FC<AppCalendarProps> = ({events}) => {
             )}
           </div>
         );
-      };
+    };
 
     return ( 
         <Calendar 
